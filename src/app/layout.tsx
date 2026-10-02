@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ToastProvider } from "./context/ToastContext";
 
 export const metadata: Metadata = {
   title: "BRH - Business Review Helper | Turn Every Customer Experience Into a Review",
@@ -30,7 +31,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans antialiased text-[#05031C] bg-white">
-        {children}
+        <ToastProvider>{children}</ToastProvider>
       </body>
     </html>
   );

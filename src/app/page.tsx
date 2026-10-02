@@ -9,9 +9,12 @@ import WhatIsBRH from "./components/WhatIsBRH";
 import QRSolutions from "./components/QRSolutions";
 import WhoItsFor from "./components/WhoItsFor";
 import Footer from "./components/Footer";
+import { useToast } from "./context/ToastContext";
+import { smoothScrollTo } from "./utils/smoothScroll";
 
 export default function Home() {
   const [isPlayingVideo, setIsPlayingVideo] = useState(false);
+  const { showToast } = useToast();
 
   return (
     <div className="min-h-screen bg-white text-[#05031C] font-sans selection:bg-[#3157FF] selection:text-white">
@@ -27,9 +30,9 @@ export default function Home() {
       {/* ========================================================================= */}
       {/* 4. HOW IT WORKS SECTION */}
       {/* ========================================================================= */}
-      <section id="how-it-works" className="pt-15 lg:pt-24 pb-1 relative overflow-hidden bg-white">
+      <section id="how-it-works" className="pt-6 sm:pt-7 lg:pt-8 pb-10 sm:pb-12 lg:pb-16 relative overflow-hidden bg-white scroll-mt-20">
         {/* waterCurve background — positioned at lower portion behind the icons */}
-        <div className="absolute left-0 right-0 bottom-0 pointer-events-none z-0" style={{ top: "28%" }}>
+        <div className="absolute left-0 right-0 bottom-0 pointer-events-none z-0" style={{ top: "20%" }}>
           <Image
             src="/Assest/waterCurve.png"
             alt="Water Curve Background"
@@ -41,7 +44,7 @@ export default function Home() {
 
         <div className="max-w-[1440px] mx-auto px-6 lg:px-16 relative z-10">
           {/* Section Header */}
-          <div className="text-center max-w-2xl mx-auto mb-16 lg:mb-20">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 lg:mb-9">
             <h2
               className="text-2xl lg:text-[42px] font-bold tracking-tight mb-3.5"
               style={{ color: "#05031C" }}
@@ -200,10 +203,10 @@ export default function Home() {
       {/* ========================================================================= */}
       {/* 6. WHY BRH? SECTION (Interlocked Colorful Cards) */}
       {/* ========================================================================= */}
-      <section id="why-brh" className="py-14 lg:py-20 overflow-hidden relative bg-white">
+      <section id="why-brh" className="pt-6 sm:pt-7 lg:pt-8 pb-10 sm:pb-12 lg:pb-16 overflow-hidden relative bg-white scroll-mt-20">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-16">
           {/* Header */}
-          <div className="max-w-2xl mb-12">
+          <div className="max-w-2xl mb-8 lg:mb-10">
             <h2
               className="text-3xl lg:text-[44px] font-bold tracking-tight mb-4"
               style={{ color: "#05031C" }}
@@ -410,17 +413,17 @@ export default function Home() {
       </section>
 
       {/* 7. Who It's For Component */}
-      {/* <WhoItsFor /> */}
+      <WhoItsFor />
 
       {/* ========================================================================= */}
       {/* 8. SEE BRH IN ACTION? SECTION (Featured Video Showcase) */}
       {/* ========================================================================= */}
-      {/* <section id="see-in-action" className="py-20 lg:py-28 relative overflow-hidden bg-white">
+      {/* <section id="see-in-action" className="pt-16 lg:pt-24 pb-10 lg:pb-13 relative overflow-hidden bg-white">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-16">
-      
-          <div className="text-center max-w-2xl mx-auto mb-16">
+
+          <div className="text-center max-w-2xl mx-auto mb-6">
             <h2
-              className="text-4xl lg:text-[52px] font-bold tracking-tight mb-4"
+              className="text-2xl lg:text-[42px] font-bold tracking-tight mb-3"
               style={{ color: "#05031C" }}
             >
               See BRH in Action?
@@ -431,18 +434,18 @@ export default function Home() {
             </p>
           </div>
 
-        
+
           <div
-            className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center p-6 sm:p-10 lg:p-12 rounded-[40px] bg-[#F7FAFE] border mb-14"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center p-6 sm:p-10 lg:p-12 mb-14"
             style={{ borderColor: "rgba(2, 32, 90, 0.1)" }}
           >
-          
+
             <div className="lg:col-span-7">
               <div
                 className="relative w-full aspect-video rounded-[28px] overflow-hidden bg-slate-900 shadow-2xl group cursor-pointer"
                 onClick={() => setIsPlayingVideo(!isPlayingVideo)}
               >
-                
+
                 <Image
                   src="/Assest/whoQR.png"
                   alt="BRH Video Showcase"
@@ -450,9 +453,9 @@ export default function Home() {
                   className="object-cover group-hover:scale-105 transition duration-500"
                 />
 
-              
+
                 <div className="absolute inset-0 bg-black/25 flex items-center justify-center transition duration-300 group-hover:bg-black/35">
-                
+
                   <div
                     className="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center text-white shadow-2xl transition-transform duration-300 group-hover:scale-110"
                     style={{ backgroundColor: "#3157FF" }}
@@ -466,7 +469,7 @@ export default function Home() {
                   </div>
                 </div>
 
-               
+
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between px-5 py-2.5 rounded-full bg-black/60 backdrop-blur-md text-white text-[14px]">
                   <div className="flex items-center gap-2">
                     <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -482,9 +485,9 @@ export default function Home() {
               </div>
             </div>
 
-         
+
             <div className="lg:col-span-5 flex flex-col items-start">
-             
+
               <div
                 className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-4 border"
                 style={{
@@ -501,7 +504,7 @@ export default function Home() {
                   />
                 </div>
                 <span
-                  className="text-[13px] font-semibold tracking-wider uppercase"
+                  className="text-[12px] font-semibold tracking-wider uppercase"
                   style={{ color: "#3157FF" }}
                 >
                   FEATURED VIDEO
@@ -509,20 +512,20 @@ export default function Home() {
               </div>
 
               <h3
-                className="text-3xl lg:text-[34px] font-bold mb-3 tracking-tight"
+                className="text-2xl lg:text-[32px] font-bold mb-3 tracking-tight"
                 style={{ color: "#05031C" }}
               >
                 How BRH Works
               </h3>
 
-              <p className="text-[16px] text-gray-700 leading-relaxed mb-8">
+              <p className="text-[15px] text-gray-700 leading-relaxed mb-8">
                 See the complete customer journey — from scanning the QR to
                 sharing feedback and submitting a review.
               </p>
 
-           
+
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full">
-                
+
                 <button
                   onClick={() => setIsPlayingVideo(!isPlayingVideo)}
                   className="inline-flex items-center justify-center gap-3 px-6 h-[56px] rounded-[20px] font-semibold text-[17px] bg-white border shadow-sm transition hover:bg-gray-50 active:scale-[0.98]"
@@ -537,7 +540,7 @@ export default function Home() {
                   <span>Watch Now</span>
                 </button>
 
-               
+
                 <a
                   href="https://youtube.com"
                   target="_blank"
@@ -572,75 +575,100 @@ export default function Home() {
             </div>
           </div>
 
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+
+          <div className="relative">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
            
-            <div className="bg-white rounded-[28px] p-4 border shadow-sm flex flex-col justify-between group cursor-pointer hover:shadow-md transition">
-              <div className="relative w-full aspect-video rounded-[20px] overflow-hidden bg-gray-100 mb-4">
+              <div
+                className="relative aspect-square sm:aspect-[4/3.8] rounded-[32px] overflow-hidden bg-slate-900 group cursor-pointer shadow-md transition-all duration-300 hover:shadow-xl"
+                onClick={() => setIsPlayingVideo(!isPlayingVideo)}
+              >
                 <Image
-                  src="/Assest/whoQR.png"
+                  src="/Assest/heroRight.png"
                   alt="QR Solutions Demo"
                   fill
-                  className="object-cover group-hover:scale-105 transition duration-300"
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg"
-                    style={{ backgroundColor: "#3157FF" }}
-                  >
-                    <svg className="w-5 h-5 ml-0.5 fill-current" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <div className="p-2">
-                <h4 className="font-semibold text-[16px] text-gray-900 mb-1">
-                  QR Solutions Demo
-                </h4>
-                <p className="text-[13px] text-gray-600">
-                  Explore Dynamic QR and Branded Frame solutions in action.
-                </p>
-              </div>
-            </div>
+                <div className="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors duration-300" />
 
-       
-            <div className="bg-white rounded-[28px] p-4 border shadow-sm flex flex-col justify-between group hover:shadow-md transition">
-              <div className="relative w-full aspect-video rounded-[20px] overflow-hidden bg-gray-100 mb-4 flex items-center justify-center">
-                <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-white shadow">
-                  <svg className="w-5 h-5 ml-0.5 fill-current" viewBox="0 0 24 24">
+              
+                <div className="absolute top-[40%] left-[45%] -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-[#3157FF] flex items-center justify-center text-white shadow-xl transition-transform duration-300 group-hover:scale-110">
+                  <svg className="w-6 h-6 ml-0.5 fill-current" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </div>
+
+                
+                <div className="absolute left-3.5 right-3.5 bottom-3.5 bg-white rounded-[22px] p-4 sm:p-5 shadow-sm">
+                  <h4 className="font-bold text-[14.5px] text-gray-900 mb-1 leading-snug">
+                    QR Solutions Demo
+                  </h4>
+                  <p className="text-[12px] text-gray-500 leading-snug">
+                    Explore Dynamic QR and Branded Frame solutions in action.
+                  </p>
+                </div>
               </div>
-              <div className="p-2">
-                <h4 className="font-semibold text-[16px] text-gray-900 mb-1">
-                  More Videos Coming Soon
-                </h4>
-                <p className="text-[13px] text-gray-600">
-                  New demos and guides are on the way!
-                </p>
+
+            
+              <div className="relative aspect-square sm:aspect-[4/3.8] rounded-[32px] overflow-hidden bg-[#D3D6DC] group shadow-sm transition-all duration-300 hover:shadow-md">
+               
+                <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-[#A2A8B2]/80 flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
+                  <svg className="w-6 h-6 ml-0.5 fill-current" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+
+              
+                <div className="absolute left-3.5 right-3.5 bottom-3.5 bg-white rounded-[22px] p-4 sm:p-5 shadow-sm">
+                  <h4 className="font-bold text-[14.5px] text-gray-900 mb-1 leading-snug">
+                    More Videos Coming Soon
+                  </h4>
+                  <p className="text-[12px] text-gray-500 leading-snug">
+                    New demos and guides are on the way!
+                  </p>
+                </div>
+              </div>
+
+            
+              <div className="relative aspect-square sm:aspect-[4/3.8] rounded-[32px] overflow-hidden bg-[#D3D6DC] group shadow-sm transition-all duration-300 hover:shadow-md">
+               
+                <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-[#A2A8B2]/80 flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
+                  <svg className="w-6 h-6 ml-0.5 fill-current" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+
+                
+                <div className="absolute left-3.5 right-3.5 bottom-3.5 bg-white rounded-[22px] p-4 sm:p-5 shadow-sm">
+                  <h4 className="font-bold text-[14.5px] text-gray-900 mb-1 leading-snug">
+                    More Videos Coming Soon
+                  </h4>
+                  <p className="text-[12px] text-gray-500 leading-snug">
+                    New demos and guides are on the way!
+                  </p>
+                </div>
               </div>
             </div>
 
          
-            <div className="bg-white rounded-[28px] p-4 border shadow-sm flex flex-col justify-between group hover:shadow-md transition">
-              <div className="relative w-full aspect-video rounded-[20px] overflow-hidden bg-gray-100 mb-4 flex items-center justify-center">
-                <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-white shadow">
-                  <svg className="w-5 h-5 ml-0.5 fill-current" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
+            <button
+              aria-label="Next videos"
+              className="hidden lg:flex absolute -right-5 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-xl items-center justify-center border border-gray-100 hover:scale-105 active:scale-95 transition-all z-20"
+            >
+              <div className="w-8 h-8 rounded-full bg-[#3157FF] flex items-center justify-center text-white shadow-sm">
+                <svg
+                  className="w-4 h-4 fill-none stroke-current"
+                  strokeWidth="2.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
               </div>
-              <div className="p-2">
-                <h4 className="font-semibold text-[16px] text-gray-900 mb-1">
-                  More Videos Coming Soon
-                </h4>
-                <p className="text-[13px] text-gray-600">
-                  New demos and guides are on the way!
-                </p>
-              </div>
-            </div>
+            </button>
           </div>
         </div>
       </section> */}
@@ -648,121 +676,124 @@ export default function Home() {
       {/* ========================================================================= */}
       {/* 9. CTA SECTION (Ready to Build Better Customer Reviews) */}
       {/* ========================================================================= */}
-      {/* <section className="py-12 lg:py-20">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-16">
-          <div
-            className="w-full rounded-[40px] lg:rounded-[60px] p-8 md:p-14 lg:p-16 relative overflow-hidden shadow-2xl"
-            style={{
-              backgroundColor: "#05031C",
-              boxShadow: "0px 10px 40px rgba(5, 3, 28, 0.4)",
-            }}
-          >
-            
+      <section className="py-10 lg:py-16 relative z-10">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-14">
+          {/* Outer wrapper — relative so the right image can overflow above the card */}
+          <div className="relative pt-[60px]">
+
+          
             <div
-              className="absolute top-0 right-1/4 w-[400px] h-[400px] rounded-full pointer-events-none opacity-30 blur-3xl"
-              style={{ backgroundColor: "#3157FF" }}
-            />
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
-              
-              <div className="lg:col-span-7 flex flex-col items-start">
-               
-                <div
-                  className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-6 shadow-md"
-                  style={{
-                    background:
-                      "linear-gradient(175.58deg, #FFFFFF -49.84%, #02205A 6.06%, #3157FF 95.5%)",
-                  }}
-                >
-                  <svg
-                    className="w-5 h-5 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z" />
-                  </svg>
-                  <span className="text-[13px] md:text-[14px] font-semibold text-white tracking-wider uppercase">
-                    READY TO GET STARTED?
-                  </span>
-                </div>
-
-            
-                <h2 className="text-3xl sm:text-4xl lg:text-[56px] font-bold text-white tracking-tight leading-[1.15] mb-6">
-                  Ready to Build Better Customer Reviews
-                </h2>
+              className="w-full relative"
+              style={{
+                backgroundImage: "url('/Assest/ReadyBg.png')",
+                backgroundSize: "100% 100%",
+                backgroundRepeat: "no-repeat",
+                filter: "drop-shadow(0px 16px 40px rgba(5, 3, 28, 0.35))",
+                minHeight: "450px",
+              }}
+            >
+         
+              <div className="flex flex-col lg:flex-row items-center lg:items-stretch min-h-[400px]">
 
               
-                <p className="text-base sm:text-lg lg:text-[18px] text-gray-300 leading-relaxed mb-10 max-w-[540px]">
-                  Make every customer interaction an opportunity to collect
-                  meaningful feedback and strengthen your online presence.
-                </p>
+                <div className="flex-1 flex flex-col items-start justify-center px-8 sm:px-12 lg:px-16 py-12 lg:py-16 z-10">
 
-                <div className="flex flex-wrap items-center gap-4 sm:gap-5">
-                
-                  <Link
-                    href="#qr-solutions"
-                    className="inline-flex items-center justify-center gap-3 px-8 h-[58px] rounded-[20px] font-semibold text-[18px] text-white shadow-xl transition duration-200 hover:scale-[1.02] active:scale-[0.98]"
-                    style={{ backgroundColor: "#3157FF" }}
+                  {/* Badge */}
+                  <div
+                    className="inline-flex items-center gap-2 px-4 py-[7px] rounded-full mb-6"
+                    style={{
+                      background: "linear-gradient(175.58deg, #FFFFFF -49.84%, #02205A 6.06%, #3157FF 95.5%)",
+                    }}
                   >
-                    <span>Get Started</span>
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2.5}
-                        d="M14 5l7 7m0 0l-7 7m7-7H3"
-                      />
+                    <svg className="w-[14px] h-[14px] text-white flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z" />
                     </svg>
-                  </Link>
+                    <span className="text-[11px] sm:text-[12px] font-semibold text-white tracking-[0.1em] uppercase whitespace-nowrap">
+                      READY TO GET STARTED?
+                    </span>
+                  </div>
 
-                
-                  <Link
-                    href="#contact-us"
-                    className="inline-flex items-center justify-center gap-3 px-8 h-[58px] rounded-[20px] font-semibold text-[18px] bg-white border transition duration-200 hover:bg-gray-100 hover:scale-[1.02] active:scale-[0.98]"
-                    style={{ borderColor: "#02205A", color: "#3157FF" }}
-                  >
-                    <span>Contact Us</span>
-                    <svg
-                      className="w-5 h-5 text-[#3157FF]"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                  {/* Heading */}
+                  <h2 className="font-bold text-white leading-[1.18] mb-4 text-[28px] sm:text-[34px] lg:text-[42px] tracking-tight">
+                    Ready to Built Better<br />
+                    <span style={{ color: "#3157FF" }}>Customer Reviews</span>
+                  </h2>
+
+                  {/* Sub-text */}
+                  <p className="text-[13px] sm:text-[14px] text-gray-300 leading-[1.7] mb-8 max-w-[430px]">
+                    Make every customer interaction an opportunity to collect<br className="hidden sm:block" />
+                    meaningful feedback and strengthen your online presence.
+                  </p>
+
+                  {/* Buttons */}
+                  <div className="flex flex-wrap items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => showToast("Coming Soon")}
+                      className="inline-flex items-center gap-2.5 px-6 h-[46px] rounded-[14px] font-semibold text-[14px] text-white transition duration-200 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                      style={{ backgroundColor: "#3157FF" }}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2.5}
-                        d="M14 5l7 7m0 0l-7 7m7-7H3"
-                      />
-                    </svg>
-                  </Link>
+                      <span>Get Started</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => smoothScrollTo("#contact-us")}
+                      className="inline-flex items-center gap-2.5 px-6 h-[46px] rounded-[14px] font-semibold text-[14px] bg-white border transition duration-200 hover:bg-gray-100 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                      style={{ borderColor: "rgba(255,255,255,0.4)", color: "#3157FF" }}
+                    >
+                      <span>Contact Us</span>
+                      <svg className="w-4 h-4 text-[#3157FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              <div className="lg:col-span-5 relative flex items-center justify-center">
-                <div className="relative w-full max-w-[500px] aspect-square">
-                  <Image
-                    src="/Assest/readyRightQR.png"
-                    alt="Ready to Build Better Reviews"
-                    fill
-                    className="object-contain drop-shadow-2xl"
-                  />
+                {/* Right spacer for desktop */}
+                <div className="hidden lg:block flex-shrink-0 w-[46%]" />
+
+                {/* Mobile image */}
+                <div className="lg:hidden w-full flex justify-center py-6 px-4">
+                  <div className="relative w-[280px] h-[280px]">
+                    <Image
+                      src="/Assest/readyRightQR.png"
+                      alt="BRH QR Stand"
+                      fill
+                      className="object-contain drop-shadow-2xl"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* ── Right QR image — overflows above card by 60px ── */}
+            <div
+              className="hidden lg:block absolute right-[-10px] bottom-2 pointer-events-none"
+              style={{
+                width: "48%",
+                top: 0,
+              }}
+            >
+              <Image
+                src="/Assest/readyRightQR.png"
+                alt="BRH QR Stand"
+                fill
+                className="object-contain object-bottom drop-shadow-2xl"
+                priority
+              />
+            </div>
+
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* 10. Footer Component */}
-      {/* <div id="contact-us">
+      <div id="contact-us" className="scroll-mt-20">
         <Footer />
-      </div> */}
+      </div>
     </div>
   );
 }

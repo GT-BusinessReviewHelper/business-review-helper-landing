@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { smoothScrollTo } from "../utils/smoothScroll";
+import { useToast } from "../context/ToastContext";
 
 interface NavItem {
   name: string;
@@ -22,18 +23,19 @@ const NAV_LINKS: NavItem[] = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
-  // Suppress scroll-spy while the programmatic smooth scroll is animating
-  const isScrollingRef = React.useRef(false);
+  const isScrollingRef = useRef(false);
+  const { showToast } = useToast();
 
-  // Automatically activate header tab when user manually scrolls
+  // Automatically activate header tab & update browser URL when user manually scrolls
   useEffect(() => {
     const handleScroll = () => {
-      // Don't update active tab while a programmatic scroll is animating
+      // Don't update active tab while a programmatic smooth scroll is animating
       if (isScrollingRef.current) return;
 
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + 120;
 
       const sections = [
+        { id: "contact-us", href: "#contact-us" },
         { id: "who-its-for", href: "#who-its-for" },
         { id: "qr-solutions", href: "#qr-solutions" },
         { id: "how-it-works", href: "#how-it-works" },
@@ -45,7 +47,7 @@ export default function Header() {
         if (el) {
           const top = el.offsetTop;
           const height = el.offsetHeight;
-          if (scrollPosition >= top - 60 && scrollPosition < top + height - 60) {
+          if (scrollPosition >= top - 80 && scrollPosition < top + height - 80) {
             found = section.href;
             break;
           }
@@ -53,6 +55,17 @@ export default function Header() {
       }
 
       setActiveSection(found);
+
+      // Dynamically update browser URL without jumping or reloading
+      if (found) {
+        if (window.location.hash !== found) {
+          window.history.replaceState(null, "", found);
+        }
+      } else if (window.scrollY < 200) {
+        if (window.location.hash && window.location.hash !== "") {
+          window.history.replaceState(null, "", window.location.pathname);
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -68,16 +81,14 @@ export default function Header() {
   ) => {
     e.preventDefault();
     if (!isReady) {
-      // Pricing and Contact Us pages are not ready yet -> do nothing
+      showToast("Coming Soon");
       return;
     }
 
-    // Set the active tab immediately on click
+    // Set active tab immediately on click
     setActiveSection(href);
-    // Pause scroll-spy so the tab doesn't flicker during animation
     isScrollingRef.current = true;
     smoothScrollTo(href, undefined, () => {
-      // Re-enable scroll-spy once the animation completes
       isScrollingRef.current = false;
     });
     setMobileMenuOpen(false);
@@ -86,7 +97,8 @@ export default function Header() {
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setActiveSection("");
-    smoothScrollTo("#home");
+    smoothScrollTo("#hero");
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -134,9 +146,8 @@ export default function Header() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href, link.isReady)}
-                className={`relative py-1 text-[13px] font-semibold transition-colors duration-200 ${
-                  isActive ? "text-[#3157FF]" : "text-[#02205A] hover:text-[#3157FF]"
-                } ${!link.isReady ? "cursor-default" : "cursor-pointer"}`}
+                className={`relative py-1 text-[13px] font-semibold transition-colors duration-200 ${isActive ? "text-[#3157FF]" : "text-[#02205A] hover:text-[#3157FF]"
+                  } cursor-pointer`}
                 style={{ fontFamily: "Inter, sans-serif" }}
               >
                 {link.name}
@@ -151,7 +162,7 @@ export default function Header() {
         {/* Mobile Hamburger Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-lg text-[#02205A] hover:bg-gray-100 transition"
+          className="md:hidden p-2 rounded-lg text-[#02205A] hover:bg-gray-100 transition cursor-pointer"
           aria-label="Toggle Navigation Menu"
         >
           {mobileMenuOpen ? (
@@ -199,11 +210,10 @@ export default function Header() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href, link.isReady)}
-                className={`relative py-2 text-[15px] font-semibold transition-colors flex items-center justify-between border-b pb-2 ${
-                  isActive
+                className={`relative py-2 text-[15px] font-semibold transition-colors flex items-center justify-between border-b pb-2 ${isActive
                     ? "text-[#3157FF] border-[#3157FF]"
                     : "text-[#02205A] border-transparent hover:text-[#3157FF]"
-                } ${!link.isReady ? "cursor-default" : "cursor-pointer"}`}
+                  } cursor-pointer`}
               >
                 <span>{link.name}</span>
                 {isActive && (
