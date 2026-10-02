@@ -5,10 +5,10 @@ import Image from "next/image";
 
 export default function QRSolutions() {
   return (
-    <section id="qr-solutions" className="pt-12 sm:pt-15 lg:pt-18 bg-white relative">
+    <section id="qr-solutions" className="pt-6 sm:pt-7 lg:pt-8 pb-10 sm:pb-12 lg:pb-16 bg-white relative scroll-mt-20">
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-xl mx-auto mb-5 sm:mb-8">
+        <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8 lg:mb-9">
           <div className="relative inline-flex flex-col items-center">
             {/* Curve Arrow hugging the left of title & subtitle */}
             <div className="absolute -left-11 sm:-left-10 top-8.5 bottom-1 w-8 sm:w-10 flex-shrink-0 pointer-events-none">

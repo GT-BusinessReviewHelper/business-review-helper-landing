@@ -3,10 +3,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { smoothScrollTo } from "../utils/smoothScroll";
+import { useToast } from "../context/ToastContext";
 
 export default function Footer() {
+  const { showToast } = useToast();
+
   const quickLinks = [
-    { name: "Home", href: "#" },
     { name: "How It Works", href: "#how-it-works" },
     { name: "QR Solutions", href: "#qr-solutions" },
     { name: "Why BRH?", href: "#why-brh" },
@@ -31,9 +34,14 @@ export default function Footer() {
           {/* Column 1: Brand & About & Socials */}
           <div className="md:col-span-4 flex flex-col justify-between pr-0 md:pr-8 lg:pr-12">
             <div>
-              {/* Logo */}
-              <div className="flex items-center gap-3 mb-4">
-                <div className="relative w-[48px] h-[52px] flex-shrink-0">
+              {/* Clickable Logo to return to Hero Section */}
+              <button
+                type="button"
+                onClick={() => smoothScrollTo("#hero")}
+                className="flex items-center gap-3 mb-4 text-left group cursor-pointer focus:outline-none"
+                aria-label="Back to Hero section"
+              >
+                <div className="relative w-[48px] h-[52px] flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
                   <Image
                     src="/Assest/logo.png"
                     alt="BRH Logo"
@@ -43,7 +51,7 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-col justify-center">
                   <span
-                    className="font-bold text-[30px] sm:text-[32px] tracking-tight leading-none text-[#05031C]"
+                    className="font-bold text-[30px] sm:text-[32px] tracking-tight leading-none text-[#05031C] group-hover:text-[#3157FF] transition-colors"
                   >
                     BRH
                   </span>
@@ -53,7 +61,7 @@ export default function Footer() {
                     BUSINESS REVIEW HELPER
                   </span>
                 </div>
-              </div>
+              </button>
 
               {/* Description */}
               <p
@@ -67,10 +75,10 @@ export default function Footer() {
             <div className="flex items-center gap-3 mt-6 sm:mt-8">
               {/* Instagram */}
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/businessreviewhelper/"
                 target="_blank"
-                rel="noreferrer"
-                className="w-[38px] h-[38px] rounded-full border border-[#05031C] flex items-center justify-center hover:bg-black/5 hover:scale-105 transition duration-200"
+                rel="noopener noreferrer"
+                className="w-[38px] h-[38px] rounded-full border border-[#05031C] flex items-center justify-center hover:bg-black/5 hover:scale-105 transition duration-200 cursor-pointer"
                 aria-label="Instagram"
               >
                 <div className="relative w-[18px] h-[18px]">
@@ -85,10 +93,10 @@ export default function Footer() {
 
               {/* LinkedIn */}
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/geloratech/posts/?feedView=all"
                 target="_blank"
-                rel="noreferrer"
-                className="w-[38px] h-[38px] rounded-full border border-[#05031C] flex items-center justify-center hover:bg-black/5 hover:scale-105 transition duration-200"
+                rel="noopener noreferrer"
+                className="w-[38px] h-[38px] rounded-full border border-[#05031C] flex items-center justify-center hover:bg-black/5 hover:scale-105 transition duration-200 cursor-pointer"
                 aria-label="LinkedIn"
               >
                 <div className="relative w-[18px] h-[18px]">
@@ -102,11 +110,10 @@ export default function Footer() {
               </a>
 
               {/* YouTube */}
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-[38px] h-[38px] rounded-full border border-[#05031C] flex items-center justify-center hover:bg-black/5 hover:scale-105 transition duration-200"
+              <button
+                type="button"
+                onClick={() => showToast("Coming Soon")}
+                className="w-[38px] h-[38px] rounded-full border border-[#05031C] flex items-center justify-center hover:bg-black/5 hover:scale-105 transition duration-200 cursor-pointer"
                 aria-label="YouTube"
               >
                 <div className="relative w-[18px] h-[18px]">
@@ -117,7 +124,7 @@ export default function Footer() {
                     className="object-contain"
                   />
                 </div>
-              </a>
+              </button>
             </div>
           </div>
 
@@ -131,9 +138,13 @@ export default function Footer() {
             <ul className="flex flex-col space-y-3">
               {quickLinks.map((item, idx) => (
                 <li key={idx}>
-                  <Link
+                  <a
                     href={item.href}
-                    className="inline-flex items-center gap-2.5 text-[14px] font-medium text-[#05031C] hover:text-[#3157FF] transition group"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      smoothScrollTo(item.href);
+                    }}
+                    className="inline-flex items-center gap-2.5 text-[14px] font-medium text-[#05031C] hover:text-[#3157FF] transition group cursor-pointer"
                   >
                     <svg
                       className="w-3 h-3 text-[#3157FF] transform group-hover:translate-x-1 transition-transform flex-shrink-0"
@@ -149,7 +160,7 @@ export default function Footer() {
                       />
                     </svg>
                     <span>{item.name}</span>
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -174,9 +185,14 @@ export default function Footer() {
                     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                   </svg>
                 </div>
-                <span className="text-[14px] font-medium text-[#05031C]">
-                  BRH Official Email
-                </span>
+                <a
+                  href="mailto:brh@geloratech.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[14px] font-medium text-[#05031C] hover:text-[#3157FF] transition-colors underline-offset-4 hover:underline"
+                >
+                  brh@geloratech.com
+                </a>
               </div>
 
               {/* Phone */}
@@ -190,25 +206,12 @@ export default function Footer() {
                     <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
                   </svg>
                 </div>
-                <span className="text-[14px] font-medium text-[#05031C]">
-                  BRH Official Phone Number
-                </span>
-              </div>
-
-              {/* Address */}
-              <div className="flex items-center gap-3">
-                <div className="w-5 h-5 flex-shrink-0 flex items-center justify-center text-[#3157FF]">
-                  <svg
-                    className="w-[18px] h-[18px] text-[#3157FF]"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                  </svg>
-                </div>
-                <span className="text-[14px] font-medium text-[#05031C]">
-                  BRH Official Address
-                </span>
+                <a
+                  href="tel:+917976143735"
+                  className="text-[14px] font-medium text-[#05031C] hover:text-[#3157FF] transition-colors"
+                >
+                  +91 -7976143735
+                </a>
               </div>
             </div>
           </div>

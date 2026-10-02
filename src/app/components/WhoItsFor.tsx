@@ -89,11 +89,11 @@ export default function WhoItsFor() {
   return (
     <section
       id="who-its-for"
-      className=" bg-[#FFFFFF] overflow-hidden flex flex-col justify-center"
+      className="pt-6 sm:pt-7 lg:pt-8 pb-10 sm:pb-12 lg:pb-16 bg-[#FFFFFF] overflow-hidden flex flex-col justify-center scroll-mt-20"
     >
       <div className="max-w-[1100px] w-full mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-6 lg:mb-8">
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 lg:mb-9">
           <h2 className="text-2xl sm:text-3xl lg:text-[42px] font-bold tracking-tight text-[#0B0F19] mb-2.5">
             Who is <span className="text-[#3157FF]">BRH</span> For?
           </h2>

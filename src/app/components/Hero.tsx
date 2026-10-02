@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useToast } from "../context/ToastContext";
 
 export default function Hero() {
+  const { showToast } = useToast();
+
   return (
-    <section className="relative overflow-visible pt-3 pb-0 lg:pt-5 -lg:pb-10 bg-white">
+    <section id="hero" className="relative overflow-visible pt-3 pb-0 lg:pt-5 lg:pb-10 bg-white scroll-mt-20">
       {/* Main Container */}
       <div className="max-w-[1440px] mx-auto px-6 lg:px-16 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
@@ -59,9 +61,10 @@ export default function Hero() {
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center gap-4 sm:gap-5 mb-7">
               {/* Get Started Button */}
-              <Link
-                href="#qr-solutions"
-                className="inline-flex items-center justify-center gap-3 px-7 h-[54px] rounded-[20px] font-semibold text-[16px] text-white shadow-md transition duration-200 hover:scale-[1.02] active:scale-[0.98]"
+              <button
+                type="button"
+                onClick={() => showToast("Coming Soon")}
+                className="inline-flex items-center justify-center gap-3 px-7 h-[54px] rounded-[20px] font-semibold text-[16px] text-white shadow-md transition duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
                 style={{
                   backgroundColor: "#05031C",
                   fontFamily: "Inter, sans-serif",
@@ -81,32 +84,7 @@ export default function Hero() {
                     d="M14 5l7 7m0 0l-7 7m7-7H3"
                   />
                 </svg>
-              </Link>
-
-              {/* How It Works Button */}
-              <Link
-                href="#how-it-works"
-                className="inline-flex items-center justify-center gap-3 px-6 h-[54px] rounded-[20px] font-semibold text-[16px] bg-white border transition duration-200 hover:bg-gray-50 hover:scale-[1.02] active:scale-[0.98]"
-                style={{
-                  borderColor: "#02205A",
-                  color: "#05031C",
-                  fontFamily: "Inter, sans-serif",
-                }}
-              >
-                <span>How It Works</span>
-                <div
-                  className="w-6 h-6 rounded-full flex items-center justify-center border"
-                  style={{ borderColor: "#05031C" }}
-                >
-                  <svg
-                    className="w-3 h-3 text-[#05031C] ml-0.5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-              </Link>
+              </button>
             </div>
 
             {/* 3 Feature Pills */}
@@ -234,8 +212,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-
     </section>
   );
 }

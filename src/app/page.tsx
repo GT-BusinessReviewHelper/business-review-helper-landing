@@ -9,9 +9,12 @@ import WhatIsBRH from "./components/WhatIsBRH";
 import QRSolutions from "./components/QRSolutions";
 import WhoItsFor from "./components/WhoItsFor";
 import Footer from "./components/Footer";
+import { useToast } from "./context/ToastContext";
+import { smoothScrollTo } from "./utils/smoothScroll";
 
 export default function Home() {
   const [isPlayingVideo, setIsPlayingVideo] = useState(false);
+  const { showToast } = useToast();
 
   return (
     <div className="min-h-screen bg-white text-[#05031C] font-sans selection:bg-[#3157FF] selection:text-white">
@@ -27,9 +30,9 @@ export default function Home() {
       {/* ========================================================================= */}
       {/* 4. HOW IT WORKS SECTION */}
       {/* ========================================================================= */}
-      <section id="how-it-works" className="pt-15 lg:pt-24 pb-1 relative overflow-hidden bg-white">
+      <section id="how-it-works" className="pt-6 sm:pt-7 lg:pt-8 pb-10 sm:pb-12 lg:pb-16 relative overflow-hidden bg-white scroll-mt-20">
         {/* waterCurve background — positioned at lower portion behind the icons */}
-        <div className="absolute left-0 right-0 bottom-0 pointer-events-none z-0" style={{ top: "28%" }}>
+        <div className="absolute left-0 right-0 bottom-0 pointer-events-none z-0" style={{ top: "20%" }}>
           <Image
             src="/Assest/waterCurve.png"
             alt="Water Curve Background"
@@ -41,7 +44,7 @@ export default function Home() {
 
         <div className="max-w-[1440px] mx-auto px-6 lg:px-16 relative z-10">
           {/* Section Header */}
-          <div className="text-center max-w-2xl mx-auto mb-16 lg:mb-20">
+          <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 lg:mb-9">
             <h2
               className="text-2xl lg:text-[42px] font-bold tracking-tight mb-3.5"
               style={{ color: "#05031C" }}
@@ -200,10 +203,10 @@ export default function Home() {
       {/* ========================================================================= */}
       {/* 6. WHY BRH? SECTION (Interlocked Colorful Cards) */}
       {/* ========================================================================= */}
-      <section id="why-brh" className="py-14 lg:py-20 overflow-hidden relative bg-white">
+      <section id="why-brh" className="pt-6 sm:pt-7 lg:pt-8 pb-10 sm:pb-12 lg:pb-16 overflow-hidden relative bg-white scroll-mt-20">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-16">
           {/* Header */}
-          <div className="max-w-2xl mb-12">
+          <div className="max-w-2xl mb-8 lg:mb-10">
             <h2
               className="text-3xl lg:text-[44px] font-bold tracking-tight mb-4"
               style={{ color: "#05031C" }}
@@ -415,7 +418,7 @@ export default function Home() {
       {/* ========================================================================= */}
       {/* 8. SEE BRH IN ACTION? SECTION (Featured Video Showcase) */}
       {/* ========================================================================= */}
-      <section id="see-in-action" className="pt-16 lg:pt-24 pb-10 lg:pb-13 relative overflow-hidden bg-white">
+      {/* <section id="see-in-action" className="pt-16 lg:pt-24 pb-10 lg:pb-13 relative overflow-hidden bg-white">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-16">
 
           <div className="text-center max-w-2xl mx-auto mb-6">
@@ -443,12 +446,12 @@ export default function Home() {
                 onClick={() => setIsPlayingVideo(!isPlayingVideo)}
               >
 
-                {/* <Image
+                <Image
                   src="/Assest/whoQR.png"
                   alt="BRH Video Showcase"
                   fill
                   className="object-cover group-hover:scale-105 transition duration-500"
-                /> */}
+                />
 
 
                 <div className="absolute inset-0 bg-black/25 flex items-center justify-center transition duration-300 group-hover:bg-black/35">
@@ -575,7 +578,7 @@ export default function Home() {
 
           <div className="relative">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Card 1: QR Solutions Demo */}
+           
               <div
                 className="relative aspect-square sm:aspect-[4/3.8] rounded-[32px] overflow-hidden bg-slate-900 group cursor-pointer shadow-md transition-all duration-300 hover:shadow-xl"
                 onClick={() => setIsPlayingVideo(!isPlayingVideo)}
@@ -588,14 +591,14 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors duration-300" />
 
-                {/* Blue Play Button */}
+              
                 <div className="absolute top-[40%] left-[45%] -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-[#3157FF] flex items-center justify-center text-white shadow-xl transition-transform duration-300 group-hover:scale-110">
                   <svg className="w-6 h-6 ml-0.5 fill-current" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </div>
 
-                {/* Floating white bottom card */}
+                
                 <div className="absolute left-3.5 right-3.5 bottom-3.5 bg-white rounded-[22px] p-4 sm:p-5 shadow-sm">
                   <h4 className="font-bold text-[14.5px] text-gray-900 mb-1 leading-snug">
                     QR Solutions Demo
@@ -606,16 +609,16 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Card 2: More Videos Coming Soon */}
+            
               <div className="relative aspect-square sm:aspect-[4/3.8] rounded-[32px] overflow-hidden bg-[#D3D6DC] group shadow-sm transition-all duration-300 hover:shadow-md">
-                {/* Gray Play Button */}
+               
                 <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-[#A2A8B2]/80 flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
                   <svg className="w-6 h-6 ml-0.5 fill-current" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </div>
 
-                {/* Floating white bottom card */}
+              
                 <div className="absolute left-3.5 right-3.5 bottom-3.5 bg-white rounded-[22px] p-4 sm:p-5 shadow-sm">
                   <h4 className="font-bold text-[14.5px] text-gray-900 mb-1 leading-snug">
                     More Videos Coming Soon
@@ -626,16 +629,16 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Card 3: More Videos Coming Soon */}
+            
               <div className="relative aspect-square sm:aspect-[4/3.8] rounded-[32px] overflow-hidden bg-[#D3D6DC] group shadow-sm transition-all duration-300 hover:shadow-md">
-                {/* Gray Play Button */}
+               
                 <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-[#A2A8B2]/80 flex items-center justify-center text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
                   <svg className="w-6 h-6 ml-0.5 fill-current" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </div>
 
-                {/* Floating white bottom card */}
+                
                 <div className="absolute left-3.5 right-3.5 bottom-3.5 bg-white rounded-[22px] p-4 sm:p-5 shadow-sm">
                   <h4 className="font-bold text-[14.5px] text-gray-900 mb-1 leading-snug">
                     More Videos Coming Soon
@@ -647,7 +650,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right arrow navigation button */}
+         
             <button
               aria-label="Next videos"
               className="hidden lg:flex absolute -right-5 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-xl items-center justify-center border border-gray-100 hover:scale-105 active:scale-95 transition-all z-20"
@@ -668,7 +671,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ========================================================================= */}
       {/* 9. CTA SECTION (Ready to Build Better Customer Reviews) */}
@@ -678,7 +681,7 @@ export default function Home() {
           {/* Outer wrapper — relative so the right image can overflow above the card */}
           <div className="relative pt-[60px]">
 
-            {/* ── Card with ReadyBg.png wave ── */}
+          
             <div
               className="w-full relative"
               style={{
@@ -689,10 +692,10 @@ export default function Home() {
                 minHeight: "450px",
               }}
             >
-              {/* Content row */}
+         
               <div className="flex flex-col lg:flex-row items-center lg:items-stretch min-h-[400px]">
 
-                {/* Left text column */}
+              
                 <div className="flex-1 flex flex-col items-start justify-center px-8 sm:px-12 lg:px-16 py-12 lg:py-16 z-10">
 
                   {/* Badge */}
@@ -724,26 +727,28 @@ export default function Home() {
 
                   {/* Buttons */}
                   <div className="flex flex-wrap items-center gap-3">
-                    <Link
-                      href="#qr-solutions"
-                      className="inline-flex items-center gap-2.5 px-6 h-[46px] rounded-[14px] font-semibold text-[14px] text-white transition duration-200 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]"
+                    <button
+                      type="button"
+                      onClick={() => showToast("Coming Soon")}
+                      className="inline-flex items-center gap-2.5 px-6 h-[46px] rounded-[14px] font-semibold text-[14px] text-white transition duration-200 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
                       style={{ backgroundColor: "#3157FF" }}
                     >
                       <span>Get Started</span>
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
-                    </Link>
-                    <Link
-                      href="#contact-us"
-                      className="inline-flex items-center gap-2.5 px-6 h-[46px] rounded-[14px] font-semibold text-[14px] bg-white border transition duration-200 hover:bg-gray-100 hover:scale-[1.02] active:scale-[0.98]"
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => smoothScrollTo("#contact-us")}
+                      className="inline-flex items-center gap-2.5 px-6 h-[46px] rounded-[14px] font-semibold text-[14px] bg-white border transition duration-200 hover:bg-gray-100 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
                       style={{ borderColor: "rgba(255,255,255,0.4)", color: "#3157FF" }}
                     >
                       <span>Contact Us</span>
                       <svg className="w-4 h-4 text-[#3157FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
-                    </Link>
+                    </button>
                   </div>
                 </div>
 
@@ -786,7 +791,7 @@ export default function Home() {
       </section>
 
       {/* 10. Footer Component */}
-      <div id="contact-us">
+      <div id="contact-us" className="scroll-mt-20">
         <Footer />
       </div>
     </div>

@@ -3,9 +3,8 @@
 let currentAnimationId: number | null = null;
 
 /**
- * Performs a visible, continuous "running scroll" animation to the target element.
- * It animates smoothly over time without pauses so intermediate sections glide by,
- * giving a natural, one-by-one visual flow until reaching the destination.
+ * Performs a visible, continuous smooth scroll animation to the target element
+ * and updates the browser URL hash dynamically.
  */
 export function smoothScrollTo(
   targetHref: string,
@@ -17,12 +16,19 @@ export function smoothScrollTo(
   const id = targetHref.startsWith("#") ? targetHref.slice(1) : targetHref;
 
   let targetTop = 0;
-  if (id !== "home" && id !== "" && id !== "/") {
+  if (id !== "home" && id !== "hero" && id !== "" && id !== "/") {
     const el = document.getElementById(id);
     if (!el) return;
-    const headerOffset = 70;
+    const headerOffset = 80; // Fixed header height is 80px
     const rect = el.getBoundingClientRect();
     targetTop = Math.max(0, window.scrollY + rect.top - headerOffset);
+  }
+
+  // Update the browser URL dynamically
+  if (id === "home" || id === "hero" || id === "" || id === "/") {
+    window.history.replaceState(null, "", window.location.pathname);
+  } else {
+    window.history.replaceState(null, "", `#${id}`);
   }
 
   const startTop = window.scrollY;
@@ -41,13 +47,12 @@ export function smoothScrollTo(
   }
 
   // Calculate duration based on distance so the scroll is snappy and fluid
-  // Min 450ms, Max 650ms for instant, responsive smooth travel across sections
   const scrollDuration =
     duration ?? Math.min(Math.max(Math.abs(distance) * 0.35, 450), 650);
 
   const startTime = performance.now();
 
-  // Cubic ease-in-out curve: gentle start, steady running scroll, gentle stop
+  // Cubic ease-in-out curve
   const easeInOutCubic = (t: number) =>
     t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
