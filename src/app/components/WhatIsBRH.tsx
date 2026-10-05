@@ -6,11 +6,10 @@ import Image from "next/image";
 export default function WhatIsBRH() {
   return (
     <section className="relative pt-0 pb-2 bg-white overflow-visible">
-      {/* 1. Curve Wave Layer (Edge-to-edge full width background) */}
-      <div className="w-full relative z-0 pointer-events-none overflow-hidden">
-        <div className="relative w-full h-[180px] sm:h-[240px] md:h-[300px] lg:h-[360px]">
-
-          <div className="absolute top-38 inset-0 z-0">
+      {/* 1. Curve Wave Layer (Edge-to-edge full width background) — Laptop/Desktop only */}
+      <div className="hidden lg:block w-full relative z-0 pointer-events-none overflow-hidden">
+        <div className="relative w-full h-[120px] sm:h-[180px] md:h-[240px] lg:h-[320px]">
+          <div className="absolute top-38 inset-0  z-0">
             <Image
               src="/Assest/blueCurve.png"
               alt="Blue Curve"
@@ -19,7 +18,6 @@ export default function WhatIsBRH() {
               priority
             />
           </div>
-
           <div className="absolute inset-0 z-10">
             <Image
               src="/Assest/blackCurve.png"
@@ -32,10 +30,10 @@ export default function WhatIsBRH() {
         </div>
       </div>
 
-      {/* 2. Main "What is BRH?" Card (Overlaps the curve with NO clipping) */}
-      <div className="max-w-[1310px] mx-auto px-4 sm:px-6 lg:px-0 relative z-20 -mt-20 sm:-mt-32 md:-mt-44 lg:-mt-52">
+      {/* 2. Main "What is BRH?" Card (Overlaps curve on desktop, clean margin on mobile/tablet) */}
+      <div className="max-w-[1310px] mx-auto px-4 sm:px-6 lg:px-0 relative z-20 mt-4 sm:mt-6 lg:-mt-44">
         <div
-          className="w-full rounded-[40px] md:rounded-[60px] lg:rounded-[80px] p-4 sm:p-8 lg:p-12 border relative bg-[#F7FAFE]"
+          className="w-full rounded-[28px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] p-4 sm:p-8 lg:p-12 border relative bg-[#F7FAFE]"
           style={{
             borderColor: "rgba(2, 32, 90, 0.13)",
             boxShadow: "0px 6px 32px rgba(2, 32, 90, 0.15)",
@@ -58,12 +56,12 @@ export default function WhatIsBRH() {
             <div className="lg:col-span-5 flex items-center justify-center relative">
               {/* Outer soft circle ring */}
               <div
-                className="w-[290px] h-[290px] sm:w-[350px] sm:h-[350px] lg:w-[380px] lg:h-[380px] rounded-full flex items-center justify-center relative p-4 flex-shrink-0"
+                className="w-[220px] h-[220px] sm:w-[290px] sm:h-[290px] lg:w-[380px] lg:h-[380px] rounded-full flex items-center justify-center relative p-4 flex-shrink-0"
                 style={{ backgroundColor: "rgba(187, 209, 252, 0.15)" }}
               >
                 {/* Inner white circle badge */}
                 <div
-                  className="w-[240px] h-[240px] sm:w-[290px] sm:h-[290px] lg:w-[320px] lg:h-[320px] rounded-full flex flex-col items-center justify-center bg-white shadow-[0px_0px_30px_3px_rgba(2,32,90,0.13)] p-6 text-center"
+                  className="w-[170px] h-[170px] sm:w-[240px] sm:h-[240px] lg:w-[320px] lg:h-[320px] rounded-full flex flex-col items-center justify-center bg-white shadow-[0px_0px_30px_3px_rgba(2,32,90,0.13)] p-4 sm:p-6 text-center"
                 >
                   <div className="relative w-[100px] h-[78px] sm:w-[97px] sm:h-[108px] mb-2 flex-shrink-0">
                     <Image
@@ -102,13 +100,13 @@ export default function WhatIsBRH() {
             {/* Right Content & 3 Feature Columns */}
             <div className="lg:col-span-7 flex flex-col pl-0 lg:pl-4">
               <h2
-                className="text-1xl sm:text-2xl lg:text-[42px] font-bold tracking-tight leading-tight mb-1 text-center lg:text-left"
+                className="text-2xl sm:text-3xl lg:text-[42px] font-bold tracking-tight leading-tight mb-2 text-center lg:text-left"
                 style={{ color: "#05031C", fontFamily: "Inter, sans-serif" }}
               >
                 What is BRH?
               </h2>
               <p
-                className="text-base sm:text-lg lg:text-[15px] leading-[22px] mb-3 text-[#000000] text-center lg:text-left max-w-[565px]"
+                className="text-[13px] sm:text-[15px] lg:text-[15px] leading-[1.6] mb-4 text-[#000000] text-center lg:text-left max-w-[565px]"
                 style={{ fontFamily: "Inter, sans-serif" }}
               >
                 BRH (Business Review Helper) is a QR-based platform that helps
