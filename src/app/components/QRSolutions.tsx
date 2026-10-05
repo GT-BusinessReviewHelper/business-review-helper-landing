@@ -10,8 +10,8 @@ export default function QRSolutions() {
         {/* Section Header */}
         <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8 lg:mb-9">
           <div className="relative inline-flex flex-col items-center">
-            {/* Curve Arrow hugging the left of title & subtitle */}
-            <div className="absolute -left-11 sm:-left-10 top-8.5 bottom-1 w-8 sm:w-10 flex-shrink-0 pointer-events-none">
+            {/* Curve Arrow hugging the left of title & subtitle — desktop only */}
+            <div className="hidden lg:block absolute -left-11 sm:-left-10 top-8.5 bottom-1 w-8 sm:w-10 flex-shrink-0 pointer-events-none">
               <Image
                 src="/Assest/curveArrow.png"
                 alt="Curve Arrow"
@@ -23,29 +23,15 @@ export default function QRSolutions() {
             {/* Title row */}
             <div className="flex items-center justify-center gap-2">
               <h2
-                className="text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight"
+                className="text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-center"
                 style={{ color: "#05031C" }}
               >
                 QR Solutions
               </h2>
-              {/* Diagonal top-right arrow */}
-              {/* <svg
-                className="w-5 h-5 sm:w-6 sm:h-6 text-[#3157FF] -mt-2 sm:-mt-3 flex-shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2.5}
-                  d="M7 17l9.2-9.2M17 17V7H7"
-                />
-              </svg> */}
             </div>
 
             {/* Subtitle */}
-            <p className="text-[14px] sm:text-[15.5px] text-gray-600 mt-4.5 font-normal text-center">
+            <p className="text-[14px] sm:text-[15.5px] text-gray-600 mt-2 sm:mt-3 font-normal text-center">
               One Dynamic QR. Update it anytime.
             </p>
           </div>
@@ -74,7 +60,7 @@ export default function QRSolutions() {
               >
                 Dynamic QR
               </h3>
-              <p className="text-[11px] sm:text-[12px] text-[#4B5563] leading-[1.6] mb-4 sm:mb-5 px-1">
+              <p className="text-[12px] text-[#4B5563] leading-[1.6] mb-4 sm:mb-5 px-1">
                 Create your QR code once and update its review destination whenever needed — without replacing the QR code.
               </p>
 
@@ -100,7 +86,7 @@ export default function QRSolutions() {
             </div>
 
             {/* 3D Illustration — dynamicQR.png (positioned on top of the round pedestal) */}
-            <div className="absolute bottom-[26px] sm:bottom-[32px] md:bottom-[70px] right-[22px] sm:right-[28px] md:right-[20px] w-[85px] h-[80px] sm:w-[125px] sm:h-[120px] lg:w-[160px] lg:h-[160px] pointer-events-none">
+            <div className="absolute bottom-[75px] md:bottom-[90px] lg:bottom-[70px] right-[35px] sm:right-[70px] md:right-[120px] lg:right-[30px] w-[85px] h-[80px] sm:w-[125px] sm:h-[120px] lg:w-[160px] lg:h-[160px] pointer-events-none">
               <Image
                 src="/Assest/dynamicQR.png"
                 alt="Dynamic QR Illustration"
@@ -112,7 +98,24 @@ export default function QRSolutions() {
 
           {/* Center Chain Connector */}
           <div className="flex flex-col items-center justify-center text-center my-4 lg:my-0 px-2 flex-shrink-0">
-            <div className="flex items-center justify-center gap-2.5 sm:gap-3 mb-2.5">
+            {/* Mobile / Tablet vertical arrows (Pointing UP and DOWN) */}
+            <div className="flex lg:hidden flex-col items-center justify-center gap-2 mb-2">
+              {/* Up arrow pointing up to Dynamic QR */}
+              <div className="relative w-6 h-6 rotate-90 flex-shrink-0">
+                <Image src="/Assest/leftArrow.png" alt="Up Arrow" fill className="object-contain" />
+              </div>
+              {/* Chain icon */}
+              <div className="relative w-10 h-10 flex-shrink-0">
+                <Image src="/Assest/sameChain.png" alt="Chain Link" fill className="object-contain drop-shadow-sm" />
+              </div>
+              {/* Down arrow pointing down to Branded Frame */}
+              <div className="relative w-6 h-6 rotate-90 flex-shrink-0">
+                <Image src="/Assest/rightArrow.png" alt="Down Arrow" fill className="object-contain" />
+              </div>
+            </div>
+
+            {/* Desktop horizontal arrows (Left & Right) */}
+            <div className="hidden lg:flex items-center justify-center gap-2.5 sm:gap-3 mb-2.5">
               {/* Left arrow */}
               <div className="relative w-6 h-6 sm:w-7 sm:h-7 flex-shrink-0">
                 <Image src="/Assest/leftArrow.png" alt="Left Arrow" fill className="object-contain" />
@@ -126,6 +129,7 @@ export default function QRSolutions() {
                 <Image src="/Assest/rightArrow.png" alt="Right Arrow" fill className="object-contain" />
               </div>
             </div>
+
             <span className="font-bold text-[14.5px] sm:text-[15.5px]" style={{ color: "#3157FF" }}>
               Same QR Code
             </span>
@@ -154,7 +158,7 @@ export default function QRSolutions() {
               >
                 Branded Frame
               </h3>
-              <p className="text-[11px] sm:text-[12px] text-[#4B5563] leading-[1.6] mb-4 sm:mb-5 px-2">
+              <p className="text-[12px]  text-[#4B5563] leading-[1.6] mb-4 sm:mb-5 px-2">
                 Use your Dynamic QR in a professional, branded frame that customers can easily scan.
               </p>
 
@@ -180,7 +184,7 @@ export default function QRSolutions() {
             </div>
 
             {/* 3D Illustration — brandedQR.png (positioned on top of the orange pedestal) */}
-            <div className="absolute bottom-[26px] sm:bottom-[32px] md:bottom-[115px] right-[35px] sm:right-[40px] md:right-[50px] w-[50px] h-[70px] sm:w-[70px] sm:h-[100px] lg:w-[110px] lg:h-[110px] pointer-events-none">
+            <div className="absolute bottom-[116px] sm:bottom-[112px] md:bottom-[135px] lg:bottom-[110px] right-[35px] sm:right-[90px] md:right-[170px] lg:right-[40px] w-[50px] h-[70px] sm:w-[70px] sm:h-[100px] lg:w-[110px] lg:h-[110px] pointer-events-none">
               <Image
                 src="/Assest/brandedQR.png"
                 alt="Branded Frame Illustration"

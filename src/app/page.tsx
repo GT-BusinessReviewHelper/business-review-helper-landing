@@ -31,8 +31,8 @@ export default function Home() {
       {/* 4. HOW IT WORKS SECTION */}
       {/* ========================================================================= */}
       <section id="how-it-works" className="pt-6 sm:pt-7 lg:pt-8 pb-10 sm:pb-12 lg:pb-16 relative overflow-hidden bg-white scroll-mt-20">
-        {/* waterCurve background — positioned at lower portion behind the icons */}
-        <div className="absolute left-0 right-0 bottom-0 pointer-events-none z-0" style={{ top: "20%" }}>
+        {/* waterCurve background — desktop/laptop only (hidden on mobile & tablet) */}
+        <div className="hidden lg:block absolute left-0 right-0 bottom-0 pointer-events-none z-0" style={{ top: "20%" }}>
           <Image
             src="/Assest/waterCurve.png"
             alt="Water Curve Background"
@@ -42,154 +42,78 @@ export default function Home() {
           />
         </div>
 
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-16 relative z-10">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 lg:mb-9">
             <h2
-              className="text-2xl lg:text-[42px] font-bold tracking-tight mb-3.5"
+              className="text-2xl sm:text-3xl lg:text-[42px] font-bold tracking-tight mb-3"
               style={{ color: "#05031C" }}
             >
               How It Works
             </h2>
-            <p className="text-base sm:text-lg lg:text-[18px] text-gray-700">
+            <p className="text-[13px] sm:text-base lg:text-[18px] text-gray-700">
               From QR scan to review — a simple journey for your customers.
             </p>
           </div>
 
-          {/* 5 Steps Grid with Connecting Visual Flow */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 relative">
+          {/* 5 Steps Grid — Mobile: 1-col | Tablet: 2-col | Desktop: 5-col in one row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-8 lg:gap-6 relative">
             {/* Step 1 */}
-            <div className="flex flex-col items-center text-center group">
-              <span
-                className="font-bold text-[32px] mb-4"
-                style={{ color: "#3157FF" }}
-              >
-                01
-              </span>
-              <div className="relative w-full h-[200px] mb-6 transition-transform duration-300 group-hover:scale-105">
-                <Image
-                  src="/Assest/QR1.png"
-                  alt="Step 01 - Create QR"
-                  fill
-                  className="object-contain"
-                />
+            <div className="flex flex-col items-center text-center group col-span-1">
+              <span className="font-extrabold text-[36px] sm:text-[38px] lg:text-[40px] mb-2" style={{ color: "#3157FF" }}>01</span>
+              <div className="relative w-full h-[180px] sm:h-[190px] lg:h-[200px] mb-3 transition-transform duration-300 group-hover:scale-105">
+                <Image src="/Assest/QR1.png" alt="Step 01 - Create QR" fill className="object-contain" />
               </div>
-              <h3
-                className="font-semibold text-[19px] mb-2"
-                style={{ color: "#05031C" }}
-              >
-                Create
-              </h3>
-              <p className="text-[15px] text-gray-600 leading-[1.4] max-w-[220px]">
+              <h3 className="font-bold text-[20px] sm:text-[22px] mb-2" style={{ color: "#05031C" }}>Create</h3>
+              <p className="text-[15px] sm:text-[16px] text-gray-600 leading-[1.5] max-w-[260px]">
                 Generate your unique QR code from the BRH dashboard.
               </p>
             </div>
 
             {/* Step 2 */}
-            <div className="flex flex-col items-center text-center group lg:mt-8">
-              <span
-                className="font-bold text-[32px] mb-4"
-                style={{ color: "#3157FF" }}
-              >
-                02
-              </span>
-              <div className="relative w-full h-[200px] mb-6 transition-transform duration-300 group-hover:scale-105">
-                <Image
-                  src="/Assest/QR2.png"
-                  alt="Step 02 - Place QR"
-                  fill
-                  className="object-contain"
-                />
+            <div className="flex flex-col items-center text-center group lg:mt-8 col-span-1">
+              <span className="font-extrabold text-[36px] sm:text-[38px] lg:text-[40px] mb-2" style={{ color: "#3157FF" }}>02</span>
+              <div className="relative w-full h-[180px] sm:h-[190px] lg:h-[200px] mb-3 transition-transform duration-300 group-hover:scale-105">
+                <Image src="/Assest/QR2.png" alt="Step 02 - Place QR" fill className="object-contain" />
               </div>
-              <h3
-                className="font-semibold text-[19px] mb-2"
-                style={{ color: "#05031C" }}
-              >
-                Place
-              </h3>
-              <p className="text-[15px] text-gray-600 leading-[1.4] max-w-[220px]">
-                Display the QR at your counter, table, entrance or any suitable
-                location.
+              <h3 className="font-bold text-[20px] sm:text-[22px] mb-2" style={{ color: "#05031C" }}>Place</h3>
+              <p className="text-[15px] sm:text-[16px] text-gray-600 leading-[1.5] max-w-[260px]">
+                Display the QR at your counter, table, entrance or any suitable location.
               </p>
             </div>
 
             {/* Step 3 */}
-            <div className="flex flex-col items-center text-center group">
-              <span
-                className="font-bold text-[32px] mb-4"
-                style={{ color: "#3157FF" }}
-              >
-                03
-              </span>
-              <div className="relative w-full h-[200px] mb-6 transition-transform duration-300 group-hover:scale-105">
-                <Image
-                  src="/Assest/QR3.png"
-                  alt="Step 03 - Scan QR"
-                  fill
-                  className="object-contain"
-                />
+            <div className="flex flex-col items-center text-center group col-span-1">
+              <span className="font-extrabold text-[36px] sm:text-[38px] lg:text-[40px] mb-2" style={{ color: "#3157FF" }}>03</span>
+              <div className="relative w-full h-[180px] sm:h-[190px] lg:h-[200px] mb-3 transition-transform duration-300 group-hover:scale-105">
+                <Image src="/Assest/QR3.png" alt="Step 03 - Scan QR" fill className="object-contain" />
               </div>
-              <h3
-                className="font-semibold text-[19px] mb-2"
-                style={{ color: "#05031C" }}
-              >
-                Scan
-              </h3>
-              <p className="text-[15px] text-gray-600 leading-[1.4] max-w-[220px]">
+              <h3 className="font-bold text-[20px] sm:text-[22px] mb-2" style={{ color: "#05031C" }}>Scan</h3>
+              <p className="text-[15px] sm:text-[16px] text-gray-600 leading-[1.5] max-w-[260px]">
                 Customers scan the QR code after their experience.
               </p>
             </div>
 
             {/* Step 4 */}
-            <div className="flex flex-col items-center text-center group lg:mt-8">
-              <span
-                className="font-bold text-[32px] mb-4"
-                style={{ color: "#3157FF" }}
-              >
-                04
-              </span>
-              <div className="relative w-full h-[200px] mb-6 transition-transform duration-300 group-hover:scale-105">
-                <Image
-                  src="/Assest/QR4.png"
-                  alt="Step 04 - Share Feedback"
-                  fill
-                  className="object-contain"
-                />
+            <div className="flex flex-col items-center text-center group lg:mt-8 col-span-1">
+              <span className="font-extrabold text-[36px] sm:text-[38px] lg:text-[40px] mb-2" style={{ color: "#3157FF" }}>04</span>
+              <div className="relative w-full h-[180px] sm:h-[190px] lg:h-[200px] mb-3 transition-transform duration-300 group-hover:scale-105">
+                <Image src="/Assest/QR4.png" alt="Step 04 - Share Feedback" fill className="object-contain" />
               </div>
-              <h3
-                className="font-semibold text-[19px] mb-2"
-                style={{ color: "#05031C" }}
-              >
-                Share
-              </h3>
-              <p className="text-[15px] text-gray-600 leading-[1.4] max-w-[220px]">
+              <h3 className="font-bold text-[20px] sm:text-[22px] mb-2" style={{ color: "#05031C" }}>Share</h3>
+              <p className="text-[15px] sm:text-[16px] text-gray-600 leading-[1.5] max-w-[260px]">
                 Customers share their rating and experience through the guided review flow.
               </p>
             </div>
 
             {/* Step 5 */}
-            <div className="flex flex-col items-center text-center group">
-              <span
-                className="font-bold text-[32px] mb-4"
-                style={{ color: "#3157FF" }}
-              >
-                05
-              </span>
-              <div className="relative w-full h-[200px] mb-6 transition-transform duration-300 group-hover:scale-105">
-                <Image
-                  src="/Assest/QR5.png"
-                  alt="Step 05 - Submit Review"
-                  fill
-                  className="object-contain"
-                />
+            <div className="flex flex-col items-center text-center group col-span-1 sm:col-span-2 lg:col-span-1">
+              <span className="font-extrabold text-[36px] sm:text-[38px] lg:text-[40px] mb-2" style={{ color: "#3157FF" }}>05</span>
+              <div className="relative w-full h-[180px] sm:h-[190px] lg:h-[200px] mb-3 transition-transform duration-300 group-hover:scale-105">
+                <Image src="/Assest/QR5.png" alt="Step 05 - Submit Review" fill className="object-contain" />
               </div>
-              <h3
-                className="font-semibold text-[19px] mb-2"
-                style={{ color: "#05031C" }}
-              >
-                Review
-              </h3>
-              <p className="text-[15px] text-gray-600 leading-[1.4] max-w-[220px]">
+              <h3 className="font-bold text-[20px] sm:text-[22px] mb-2" style={{ color: "#05031C" }}>Review</h3>
+              <p className="text-[15px] sm:text-[16px] text-gray-600 leading-[1.5] max-w-[260px]">
                 Customers are guided to the relevant platform to submit their review.
               </p>
             </div>
@@ -220,11 +144,11 @@ export default function Home() {
             </p>
           </div>
 
-          {/* 4 Connected Cards: Two Pairs (Card 1+2 and Card 3+4) */}
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-8 xl:gap-10 pt-10 pb-16">
+          {/* 4 Connected Cards: Two Pairs */}
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-10 lg:gap-8 xl:gap-10 pt-8 pb-12">
 
-            {/* PAIR 1: Card 1 (Blue) + Card 2 (Green) connected by leftMaginte */}
-            <div className="relative flex flex-col sm:flex-row items-center justify-center">
+            {/* PAIR 1: Card 1 (Blue) + Card 2 (Green) */}
+            <div className="relative flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0">
               {/* Connector between Card 1 and Card 2 */}
               <div className="absolute -top-12 lg:-top-14 left-[50%] -translate-x-[50%] w-[125px] h-[105px] lg:w-[135px] lg:h-[115px] z-30 pointer-events-none hidden sm:block">
                 <Image
@@ -238,7 +162,7 @@ export default function Home() {
 
               {/* Card 1: Blue */}
               <div
-                className="w-full sm:w-[260px] md:w-[275px] lg:w-[270px] xl:w-[280px] rounded-[36px] p-6 sm:p-7 flex flex-col justify-between transition-transform duration-300 hover:scale-[1.02] relative shadow-md lg:-rotate-3 lg:translate-y-7 z-10"
+                className="w-full sm:w-[240px] md:w-[260px] lg:w-[270px] xl:w-[280px] rounded-[28px] sm:rounded-[36px] p-5 sm:p-7 flex flex-col justify-between transition-transform duration-300 hover:scale-[1.02] relative shadow-md lg:-rotate-3 lg:translate-y-7 z-10"
                 style={{
                   backgroundColor: "#E3EFFF",
                   boxShadow: "0px 10px 25px rgba(0, 0, 0, 0.05)",
@@ -275,9 +199,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Card 2: Green (overlaps Card 1 slightly on desktop) */}
+              {/* Card 2: Green */}
               <div
-                className="w-full sm:w-[260px] md:w-[275px] lg:w-[270px] xl:w-[280px] sm:-ml-5  xl:ml-1 rounded-[36px] p-6 sm:p-7 flex flex-col justify-between transition-transform duration-300 hover:scale-[1.02] relative shadow-md lg:rotate-2 lg:translate-y-0 z-20"
+                className="w-full sm:w-[240px] md:w-[260px] lg:w-[270px] xl:w-[280px] sm:-ml-4 xl:ml-1 rounded-[28px] sm:rounded-[36px] p-5 sm:p-7 flex flex-col justify-between transition-transform duration-300 hover:scale-[1.02] relative shadow-md lg:rotate-2 lg:translate-y-0 z-20"
                 style={{
                   backgroundColor: "#E6F6F0",
                   boxShadow: "0px 10px 25px rgba(0, 0, 0, 0.05)",
@@ -316,8 +240,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* PAIR 2: Card 3 (Orange) + Card 4 (Purple) connected by rightMaginte */}
-            <div className="relative flex flex-col sm:flex-row items-center justify-center">
+            {/* PAIR 2: Card 3 (Orange) + Card 4 (Purple) */}
+            <div className="relative flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0">
               {/* Connector between Card 3 and Card 4 */}
               <div className="absolute -top-12 lg:-top-14 left-[50%] -translate-x-[50%] w-[130px] h-[115px] lg:w-[145px] lg:h-[125px] z-30 pointer-events-none hidden sm:block">
                 <Image
@@ -331,7 +255,7 @@ export default function Home() {
 
               {/* Card 3: Orange */}
               <div
-                className="w-full sm:w-[260px] md:w-[275px] lg:w-[270px] xl:w-[280px] rounded-[36px] p-6 sm:p-7 flex flex-col justify-between transition-transform duration-300 hover:scale-[1.02] relative shadow-md lg:-rotate-2 lg:translate-y-1 z-10"
+                className="w-full sm:w-[240px] md:w-[260px] lg:w-[270px] xl:w-[280px] rounded-[28px] sm:rounded-[36px] p-5 sm:p-7 flex flex-col justify-between transition-transform duration-300 hover:scale-[1.02] relative shadow-md lg:-rotate-2 lg:translate-y-1 z-10"
                 style={{
                   backgroundColor: "#FFE9C7",
                   boxShadow: "0px 10px 25px rgba(0, 0, 0, 0.05)",
@@ -368,9 +292,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Card 4: Purple (overlaps Card 3 slightly on desktop) */}
+              {/* Card 4: Purple */}
               <div
-                className="w-full sm:w-[260px] md:w-[275px] lg:w-[270px] xl:w-[280px] sm:-ml-5 lg:-ml-6 xl:ml-4 rounded-[36px] p-6 sm:p-7 flex flex-col justify-between transition-transform duration-300 hover:scale-[1.02] relative shadow-md lg:-rotate-3 lg:translate-y-7 z-20"
+                className="w-full sm:w-[240px] md:w-[260px] lg:w-[270px] xl:w-[280px] sm:-ml-4 lg:-ml-6 xl:ml-4 rounded-[28px] sm:rounded-[36px] p-5 sm:p-7 flex flex-col justify-between transition-transform duration-300 hover:scale-[1.02] relative shadow-md lg:-rotate-3 lg:translate-y-7 z-20"
                 style={{
                   backgroundColor: "#EDDEFF",
                   boxShadow: "0px 10px 25px rgba(0, 0, 0, 0.05)",
@@ -678,24 +602,36 @@ export default function Home() {
       {/* ========================================================================= */}
       <section className="py-10 lg:py-16 relative z-10">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-14">
-          {/* Outer wrapper — relative so the right image can overflow above the card */}
-          <div className="relative pt-[60px]">
+          {/* Outer wrapper — relative so the right image can overflow above the card on desktop */}
+          <div className="relative pt-0 lg:pt-[60px]">
 
-          
             <div
-              className="w-full relative"
+              className="w-full relative rounded-[28px] sm:rounded-[36px] lg:rounded-none overflow-hidden lg:overflow-visible"
               style={{
-                backgroundImage: "url('/Assest/ReadyBg.png')",
-                backgroundSize: "100% 100%",
-                backgroundRepeat: "no-repeat",
                 filter: "drop-shadow(0px 16px 40px rgba(5, 3, 28, 0.35))",
                 minHeight: "450px",
               }}
             >
-         
-              <div className="flex flex-col lg:flex-row items-center lg:items-stretch min-h-[400px]">
+              {/* Desktop background using ReadyBg.png */}
+              <div
+                className="hidden lg:block absolute inset-0 z-0 pointer-events-none"
+                style={{
+                  backgroundImage: "url('/Assest/ReadyBg.png')",
+                  backgroundSize: "100% 100%",
+                  backgroundRepeat: "no-repeat",
+                }}
+              />
 
-              
+              {/* Mobile / Tablet background: Seamless rich navy gradient with clean rounded corners */}
+              <div
+                className="lg:hidden absolute inset-0 z-0 pointer-events-none rounded-[28px] sm:rounded-[36px]"
+                style={{
+                  background: "linear-gradient(165deg, #05031C 0%, #0A1B44 50%, #021235 100%)",
+                }}
+              />
+         
+              <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-stretch min-h-[400px]">
+
                 <div className="flex-1 flex flex-col items-start justify-center px-8 sm:px-12 lg:px-16 py-12 lg:py-16 z-10">
 
                   {/* Badge */}
@@ -738,9 +674,8 @@ export default function Home() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     </button>
-                    <button
-                      type="button"
-                      onClick={() => smoothScrollTo("#contact-us")}
+                    <Link
+                      href="/contact-us"
                       className="inline-flex items-center gap-2.5 px-6 h-[46px] rounded-[14px] font-semibold text-[14px] bg-white border transition duration-200 hover:bg-gray-100 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
                       style={{ borderColor: "rgba(255,255,255,0.4)", color: "#3157FF" }}
                     >
@@ -748,7 +683,7 @@ export default function Home() {
                       <svg className="w-4 h-4 text-[#3157FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
-                    </button>
+                    </Link>
                   </div>
                 </div>
 

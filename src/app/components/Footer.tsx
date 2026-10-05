@@ -3,11 +3,16 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { smoothScrollTo } from "../utils/smoothScroll";
 import { useToast } from "../context/ToastContext";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const router = useRouter();
   const { showToast } = useToast();
+
+  const isContactPage = pathname?.startsWith("/contact");
 
   const quickLinks = [
     { name: "How It Works", href: "#how-it-works" },
@@ -17,29 +22,60 @@ export default function Footer() {
     { name: "See BRH in Action", href: "#see-in-action" },
   ];
 
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    if (isContactPage) {
+      router.push(`/${href}`);
+    } else {
+      smoothScrollTo(href);
+    }
+  };
+
+  const handleLogoClick = () => {
+    if (isContactPage) {
+      router.push("/");
+    } else {
+      smoothScrollTo("#hero");
+    }
+  };
+
   return (
     <footer
-      className="w-full relative -mt-16 sm:-mt-20 lg:-mt-24 z-0"
-      style={{
-        backgroundImage: "url('/Assest/footerBg.png')",
-        backgroundSize: "100% 100%",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "top center",
-      }}
+      className={`w-full relative z-0 ${isContactPage ? "mt-0" : "mt-6 sm:mt-8 lg:-mt-24"
+        }`}
     >
-      <div className="max-w-[1360px] mx-auto px-6 sm:px-8 lg:px-12 pt-20 sm:pt-24 lg:pt-28 pb-8">
+      {/* Background for Desktop: footerBg.png */}
+      <div
+        className="hidden lg:block absolute inset-0 z-0 pointer-events-none"
+        style={{
+          backgroundImage: "url('/Assest/footerBg.png')",
+          backgroundSize: "100% 100%",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "top center",
+        }}
+      />
+
+      {/* Background for Mobile & Tablet: Clean subtle light gradient */}
+      <div
+        className="lg:hidden absolute inset-0 z-0 pointer-events-none"
+        style={{
+          background: "linear-gradient(180deg, #F3F7FF 0%, #FFFFFF 100%)",
+        }}
+      />
+
+      <div className="max-w-[1360px] mx-auto px-6 sm:px-8 lg:px-12 pt-10 sm:pt-14 lg:pt-28 pb-8 relative z-10">
         {/* Top 3 Columns Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-0 pb-10">
 
           {/* Column 1: Brand & About & Socials */}
           <div className="md:col-span-4 flex flex-col justify-between pr-0 md:pr-8 lg:pr-12">
             <div>
-              {/* Clickable Logo to return to Hero Section */}
+              {/* Clickable Logo to return to Hero Section / Home */}
               <button
                 type="button"
-                onClick={() => smoothScrollTo("#hero")}
+                onClick={handleLogoClick}
                 className="flex items-center gap-3 mb-4 text-left group cursor-pointer focus:outline-none"
-                aria-label="Back to Hero section"
+                aria-label="Back to Home / Hero section"
               >
                 <div className="relative w-[48px] h-[52px] flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
                   <Image
@@ -49,14 +85,14 @@ export default function Footer() {
                     className="object-contain"
                   />
                 </div>
-                <div className="flex flex-col justify-center">
+                <div className="flex flex-col justify-center ">
                   <span
                     className="font-bold text-[30px] sm:text-[32px] tracking-tight leading-none text-[#05031C] group-hover:text-[#3157FF] transition-colors"
                   >
                     BRH
                   </span>
                   <span
-                    className="text-[11px] font-semibold tracking-[0.14em] mt-1 text-[#05031C]"
+                    className="text-[11px] font-semibold tracking-[0.14em] mt-1 text-[#05031C] group-hover:text-[#3157FF]"
                   >
                     BUSINESS REVIEW HELPER
                   </span>
@@ -140,10 +176,7 @@ export default function Footer() {
                 <li key={idx}>
                   <a
                     href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      smoothScrollTo(item.href);
-                    }}
+                    onClick={(e) => handleLinkClick(e, item.href)}
                     className="inline-flex items-center gap-2.5 text-[14px] font-medium text-[#05031C] hover:text-[#3157FF] transition group cursor-pointer"
                   >
                     <svg
@@ -221,37 +254,24 @@ export default function Footer() {
         <div className="w-full h-[1px] bg-gray-300 my-1" />
 
         {/* Bottom Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[13px] font-semibold text-[#05031C] pt-1">
-          <div>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] sm:text-[13px] font-semibold text-[#05031C] pt-2">
+          <div className="order-3 sm:order-1">
             © 2026 BRH. All rights reserved.
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-[#05031C] font-semibold">Powered By</span>
-            <div className="relative w-[180px] h-[90px]">
-              <a
-                href="https://www.geloratech.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/Assest/geloraLogo.png"
-                  alt="Powered By Gelora"
-                  fill
-                  className="object-contain"
-                />
+          <div className="flex items-center gap-1.5 order-1 sm:order-2">
+            <span className="text-[#05031C] font-semibold text-[12px] sm:text-[13px]">Powered By</span>
+            <div className="relative w-[120px] h-[60px] sm:w-[160px] sm:h-[80px]">
+              <a href="https://www.geloratech.com/" target="_blank" rel="noopener noreferrer">
+                <Image src="/Assest/geloraLogo.png" alt="Powered By Gelora" fill className="object-contain" />
               </a>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <Link href="#privacy" className="hover:underline text-[#05031C]">
-              Privacy Policy
-            </Link>
+          <div className="flex items-center gap-2 order-2 sm:order-3">
+            <Link href="/privacy" className="hover:underline text-[#05031C]">Privacy Policy</Link>
             <span className="text-gray-400">|</span>
-            <Link href="#terms" className="hover:underline text-[#05031C]">
-              Terms & Conditions
-            </Link>
+            <Link href="/terms" className="hover:underline text-[#05031C]">Terms &amp; Conditions</Link>
           </div>
         </div>
       </div>
