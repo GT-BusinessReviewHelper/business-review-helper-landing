@@ -39,10 +39,11 @@ export default function ContactUsPage() {
   });
 
   const [selectedCountry, setSelectedCountry] = useState<CountryCode>("IN");
-  const [, setCountryDialCode] = useState<string>("+91");
+  const [countryDialCode, setCountryDialCode] = useState<string>("+91");
   const [fieldErrors, setFieldErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -81,7 +82,7 @@ export default function ContactUsPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errors: FormErrors = {};
 
@@ -137,11 +138,34 @@ export default function ContactUsPage() {
     }
 
     setFieldErrors({});
+    setSubmitError("");
     setIsSubmitting(true);
 
-    // Flip to success state without toast
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: trimmedFirstName,
+          lastName: trimmedLastName,
+          email: trimmedEmail,
+          phone: formData.phone.trim(),
+          message: formData.message.trim(),
+          agreed: true,
+          countryCode: selectedCountry,
+          dialCode: countryDialCode,
+        }),
+      });
+
+      const result = (await response.json().catch(() => null)) as
+        | { ok?: boolean; error?: string }
+        | null;
+
+      if (!response.ok || !result?.ok) {
+        setSubmitError(result?.error || "Could not send your message. Please try again.");
+        return;
+      }
+
       setIsSuccess(true);
       setFormData({
         email: "",
@@ -151,12 +175,17 @@ export default function ContactUsPage() {
         message: "",
         agreed: false,
       });
-    }, 600);
+    } catch {
+      setSubmitError("Could not send your message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleResetForm = () => {
     setIsSuccess(false);
     setFieldErrors({});
+    setSubmitError("");
   };
 
   return (
@@ -559,6 +588,11 @@ export default function ContactUsPage() {
                               </>
                             )}
                           </button>
+                          {submitError && (
+                            <span className="block text-[#E53935] text-[11.5px] font-medium mt-2 ml-1">
+                              {submitError}
+                            </span>
+                          )}
                         </div>
 
                       </form>
